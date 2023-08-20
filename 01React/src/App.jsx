@@ -1,9 +1,10 @@
-import Demo from "./Demo."
+import Demo from "./Demo.jsx"
 
 function App() {
+  const username = "gaurab"
   return <>
   <Demo/>
-    <h1>Hello World</h1>
+    <h1>Hello {username}</h1>
     
   </>  
 }
