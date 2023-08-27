@@ -1,0 +1,26 @@
+*{
+    color: white;
+}
+
+body{
+    background-color:#242B2E;
+}
+
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+button{
+    margin-bottom: 10px;
+    background-color: #0a0a0a;
+    font-size: large;
+    cursor: pointer;
+    border-radius: 20px;
+    padding: 10px;
+   
+    
+}
