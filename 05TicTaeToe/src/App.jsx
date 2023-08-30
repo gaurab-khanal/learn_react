@@ -101,9 +101,7 @@ function App() {
          ))}
         </div>
           
-        <div className='flex items-center justify-center mt-5'>Score goes here
-        
-        </div>
+       
       </div>
       <ToastContainer position='top-center'  autoClose={1000} /> 
     </div>
