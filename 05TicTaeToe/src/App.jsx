@@ -8,8 +8,6 @@ const itemArray = new Array(9).fill("empty");
 
 function App() {
 
-
-  // const [itemArray, setItemArray] = useState(initialItemArray);
   const [isCross, setIsCross] = useState(false);
   const [winMessage, setWinMessage] = useState("");
 
@@ -31,14 +29,25 @@ function App() {
     [2,4,6],
   ];
 
+
+  const isAllEmpty = ()=>{
+    return itemArray.includes('empty')
+  }
+
   const checkIsWinner= () =>{
-    winIndex.forEach((item,index)=>{
+    let hasWinner = false;
+    winIndex.forEach((item)=>{
       const [a,b,c] = item;
       if(itemArray[a]==itemArray[b] && itemArray[a]==itemArray[c] && itemArray[a]!="empty"){
         setWinMessage(`${itemArray[a]} wins`)
+        hasWinner = true;
         return toast(`${itemArray[a]} wins`, {type:"success"})
       }
     })
+    if(!hasWinner && !isAllEmpty()){
+      setWinMessage(`Draw`)
+      return toast(`Draw!!`, {type:"warning"})
+  }
   }
 
   const changeItem = itemNumber =>{
@@ -49,7 +58,6 @@ function App() {
     }
     
     if(itemArray[itemNumber] === "empty"){
-      // const updatedItemArray = [...itemArray];
       itemArray[itemNumber] = isCross ? "cross": "circle"
       setIsCross(!isCross)
     }else{
