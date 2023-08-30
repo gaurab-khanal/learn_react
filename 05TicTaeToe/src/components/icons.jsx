@@ -2,6 +2,7 @@ import {FaTimes, FaRegCircle, FaPen} from "react-icons/fa";
 
 
 
+// eslint-disable-next-line react/prop-types
 function Icon({name}){
     switch (name) {
         case "circle":
