@@ -4,7 +4,7 @@ import Header from "./components/Header"
 import HeroSection from "./components/HeroSection"
 
 function App() {
-
+  
   const themeHook = useState("light");
 
   return (
