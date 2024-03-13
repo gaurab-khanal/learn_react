@@ -1,24 +1,16 @@
-import React, { useCallback, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "./Button";
 import Text from "./Text";
+import Timer from "./Timer";
 
 const App = () => {
-  const [message, setMessage] = useState(0);
-
-  const handleClick = useCallback(() => {
-    setMessage((prevData) => {
-      // console.log(prevData);
-      return prevData + 1;
-    });
-  }, []);
-
-  // console.log(message);
+  const [showTimer, toggleTimer] = useState(true);
+  const content = "Hello ";
 
   return (
     <>
-      <div>{message}</div>
-      <Button clickHandler={handleClick} />
-      {/* <button onClick={handleClick}>CHange message{message}</button> */}
+      {showTimer && <Timer content={content} />}
+      <button onClick={() => toggleTimer((prv) => !prv)}>Remove timer</button>
     </>
   );
 };
