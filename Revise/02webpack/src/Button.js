@@ -1,11 +1,7 @@
 import React from "react";
 
-const Button = () => {
-  const clickHandler = () => {
-    console.log("This is button");
-  };
-
-  return <div onClick={clickHandler}>Button</div>;
+const Button = ({ clickHandler }) => {
+  return <button onClick={clickHandler}>Button</button>;
 };
 
 export default Button;
