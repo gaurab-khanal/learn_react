@@ -11,7 +11,7 @@ const Tooltip = ({ children, targetPosition }) => {
   let now = performance.now();
 
   while (performance.now() - now < 1000) {
-    // render blocking
+    // render blocking code
   }
 
   if (targetPosition !== null) {
@@ -25,6 +25,11 @@ const Tooltip = ({ children, targetPosition }) => {
 
   const tooltipRef = useRef(null);
 
+  // useEffect runs after components mounts
+  //but
+  // useLayoutEffect
+  // runs before compounts mounts and block component mounting till
+  // its execution is completed
   useLayoutEffect(() => {
     const { height } = tooltipRef.current.getBoundingClientRect();
     setTooltipHeight(height);
