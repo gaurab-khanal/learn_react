@@ -1,7 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 
-const Button = ({ clickHandler }) => {
+const Button = memo(({ clickHandler }) => {
+  console.log("hello world");
   return <button onClick={clickHandler}>Button</button>;
-};
+});
 
 export default Button;

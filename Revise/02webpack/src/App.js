@@ -1,25 +1,24 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Button from "./Button";
 import Text from "./Text";
 
 const App = () => {
-  const [data, setData] = useState([
-    { id: "a", text: "text 1" },
-    { id: "b", text: "text 2" },
-    { id: "c", text: "text 3" },
-    { id: "d", text: "text 4" },
-  ]);
+  const [message, setMessage] = useState(0);
 
-  const addMoreData = () => {
-    setData((prevData) => [...prevData, { id: "f", text: "text5" }]);
-  };
+  const handleClick = useCallback(() => {
+    setMessage((prevData) => {
+      // console.log(prevData);
+      return prevData + 1;
+    });
+  }, []);
+
+  // console.log(message);
 
   return (
     <>
-      {data.map((item, index) => (
-        <Text key={item.id}>{item.text}</Text>
-      ))}
-      <Button clickHandler={addMoreData} />
+      <div>{message}</div>
+      <Button clickHandler={handleClick} />
+      {/* <button onClick={handleClick}>CHange message{message}</button> */}
     </>
   );
 };
