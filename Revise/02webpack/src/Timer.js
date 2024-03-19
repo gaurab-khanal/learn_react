@@ -1,10 +1,15 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+
 const Timer = ({ content }) => {
   const [counter, setCounter] = useState(0);
 
   // this will run after browser is fully painted
+
+  const time = useRef(null);
+  // useRef returns one object called current
+
   useEffect(() => {
-    const time = setInterval(() => {
+    time.current = setInterval(() => {
       console.log("I am running ");
       setCounter((prv) => prv + 1);
     }, 1000);
@@ -15,15 +20,13 @@ const Timer = ({ content }) => {
 
     return () => {
       clearInterval(time);
-      console.log("I was unmounted");
     };
   }, []);
 
-  useEffect(() => {
-    return () => {
-      console.log("Content unmounted");
-    };
-  }, [content]);
+  const stopTimer = () => {
+    console.log("stop: ", time);
+    clearInterval(time.current);
+  };
 
   // it will run before browser paints
   // use this when you want to render something after calculating.
@@ -33,16 +36,14 @@ const Timer = ({ content }) => {
 
   // it is used at a places where we want to calculate any element before the browser paints
   // helps us avoid lags and gatters in our applications
-  useLayoutEffect(() => {
-    console.log("running uselayout effect");
-  }, []);
 
   return (
     <>
       <span>Current time is: {counter}</span>
       <br />
       <span>{content}</span>
-      <button>Start Timer</button>
+
+      <button onClick={stopTimer}>Stop Timer</button>
     </>
   );
 };
