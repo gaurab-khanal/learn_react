@@ -1,10 +1,15 @@
 import React, { useCallback } from "react";
 import ThirdParent from "./ThirdParent";
 
-const SecondParent = ({ count }) => {
+const SecondParent = () => {
+  const myFunc = useCallback(() => {
+    console.log("My function called");
+  }, []);
+
   const handleChange = useCallback(() => {
-    console.log("hey hey count is : ", count);
-  }, [count]);
+    console.log("hey hey");
+    myFunc();
+  }, [myFunc]);
 
   return (
     <>
