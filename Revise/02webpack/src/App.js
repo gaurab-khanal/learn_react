@@ -5,6 +5,7 @@ import Timer from "./Timer";
 import ButtonWithTooltip from "./ButtonWithToolTip";
 import Input from "./Input";
 import SecondParent from "./SecondParent";
+import PrintTable from "./PrintTable";
 
 // useref is used to reference value that isnt needed for re-rendering
 // it can remember value during re-rerender
@@ -17,27 +18,17 @@ import SecondParent from "./SecondParent";
 // pass ref to functional components (forward ref)
 
 const App = () => {
-  const [count, setCount] = useState(0);
+  const [count1, setCount1] = useState(0);
   const [count2, setCount2] = useState(0);
-
-  const handleCLick = () => {
-    setCount((prv) => prv + 1);
-    console.log("I am parent");
-  };
-  const handleCLick2 = () => {
-    setCount2((prv) => prv + 1);
-    console.log("I am parent2");
-  };
 
   return (
     <>
-      Outer most component: {count}{" "}
-      <button onClick={handleCLick}>Count++</button>
+      Counter1: {count1}
+      <button onClick={() => setCount1((prv) => prv + 1)}>Increase c1</button>
+      Counter1: {count2}
+      <button onClick={() => setCount2((prv) => prv + 1)}>Increase c2</button>
       <br />
-      Outer most component count2: {count2}{" "}
-      <button onClick={handleCLick2}>Count++2</button>
-      <br />
-      <SecondParent count={count} />
+      <PrintTable num={count1} />
     </>
   );
 };
