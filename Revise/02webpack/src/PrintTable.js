@@ -15,14 +15,24 @@ const generateTable = (num) => {
   return arr;
 };
 
-const PrintTable = ({ num }) => {
-  //   const table = generateTable(num);
+// avoid passing arrays, object, non-primite data types as a props cause it will cause a rerender
+const PrintTable = memo(({ num, val, arr }) => {
+  const table = generateTable(num);
 
-  const table = useMemo(() => generateTable(num), [num]);
+  //   const table = useMemo(() => generateTable(num), [num]);
 
   console.log(table);
 
-  return <div>{table.map((item) => item)}</div>;
-};
+  return (
+    <div>
+      {table.map((item) => item)}
+      {/* {obj.channel} */}
+      {arr?.map((item) => (
+        <span>{item}</span>
+      ))}
+      {val}
+    </div>
+  );
+});
 
 export default PrintTable;

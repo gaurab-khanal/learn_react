@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Button from "./Button";
 import Text from "./Text";
 import Timer from "./Timer";
@@ -21,6 +21,13 @@ const App = () => {
   const [count1, setCount1] = useState(0);
   const [count2, setCount2] = useState(0);
 
+  // const [myObj, setMyObj] = useState({ channel: "Hello" });
+  const myObj = { channel: "Hello" };
+
+  const arr = useMemo(() => ["a", "b"], []);
+
+  const val = 10;
+
   return (
     <>
       Counter1: {count1}
@@ -28,7 +35,7 @@ const App = () => {
       Counter1: {count2}
       <button onClick={() => setCount2((prv) => prv + 1)}>Increase c2</button>
       <br />
-      <PrintTable num={count1} />
+      <PrintTable num={count1} val={val} arr={arr} />
     </>
   );
 };
