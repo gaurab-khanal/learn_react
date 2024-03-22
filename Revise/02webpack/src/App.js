@@ -1,11 +1,22 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  lazy,
+  Suspense,
+} from "react";
+
 import Button from "./Button";
-import Text from "./Text";
 import Timer from "./Timer";
+// import Text from "./Text.js";
 import ButtonWithTooltip from "./ButtonWithToolTip";
 import Input from "./Input";
 import SecondParent from "./SecondParent";
 import PrintTable from "./PrintTable";
+import Loading from "./Loading.js";
+
+const Text = lazy(() => delayForDemo(import("./Text.js")));
 
 // useref is used to reference value that isnt needed for re-rendering
 // it can remember value during re-rerender
@@ -18,26 +29,24 @@ import PrintTable from "./PrintTable";
 // pass ref to functional components (forward ref)
 
 const App = () => {
-  const [count1, setCount1] = useState(0);
-  const [count2, setCount2] = useState(0);
-
-  // const [myObj, setMyObj] = useState({ channel: "Hello" });
-  const myObj = { channel: "Hello" };
-
-  const arr = useMemo(() => ["a", "b"], []);
-
-  const val = 10;
+  const [showText, toggleText] = useState(false);
 
   return (
     <>
-      Counter1: {count1}
-      <button onClick={() => setCount1((prv) => prv + 1)}>Increase c1</button>
-      Counter1: {count2}
-      <button onClick={() => setCount2((prv) => prv + 1)}>Increase c2</button>
-      <br />
-      <PrintTable num={count1} val={val} arr={arr} />
+      <button onClick={() => toggleText((prv) => !prv)}>Toggle text</button>
+      {showText && (
+        <Suspense fallback={<Loading />}>
+          <Text>Hello world</Text>
+        </Suspense>
+      )}
     </>
   );
 };
+
+function delayForDemo(promise) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, 2000);
+  }).then(() => promise);
+}
 
 export default App;

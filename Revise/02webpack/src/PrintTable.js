@@ -16,6 +16,7 @@ const generateTable = (num) => {
 };
 
 // avoid passing arrays, object, non-primite data types as a props cause it will cause a rerender
+// memo dont track non-primitive data types
 const PrintTable = memo(({ num, val, arr }) => {
   const table = generateTable(num);
 
