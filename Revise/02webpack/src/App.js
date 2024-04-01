@@ -18,6 +18,7 @@ import Loading from "./Loading.js";
 import Heading from "./Heading.js";
 import { ThemeContext } from "./context.js";
 import Navbar from "./Navbar.js";
+import { createPortal } from "react-dom";
 
 const Text = lazy(() => delayForDemo(import("./Text.js")));
 
@@ -32,19 +33,16 @@ const Text = lazy(() => delayForDemo(import("./Text.js")));
 // pass ref to functional components (forward ref)
 
 const App = () => {
-  const [theme, setTheme] = useState("dark");
+  const [showModal, toggleModal] = useState("false");
 
   return (
-    <ThemeContext.Provider value={[theme, setTheme]}>
-      <Navbar />
-    </ThemeContext.Provider>
+    <>
+      Hey, I am inside root
+      <button onClick={() => toggleModal((prv) => !prv)}>Toggle Modal</button>
+      {showModal &&
+        createPortal(<div>This is modal content</div>, document.body)}
+    </>
   );
 };
-
-function delayForDemo(promise) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, 2000);
-  }).then(() => promise);
-}
 
 export default App;
