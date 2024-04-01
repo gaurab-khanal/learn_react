@@ -15,6 +15,9 @@ import Input from "./Input";
 import SecondParent from "./SecondParent";
 import PrintTable from "./PrintTable";
 import Loading from "./Loading.js";
+import Heading from "./Heading.js";
+import { ThemeContext } from "./context.js";
+import Navbar from "./Navbar.js";
 
 const Text = lazy(() => delayForDemo(import("./Text.js")));
 
@@ -29,17 +32,12 @@ const Text = lazy(() => delayForDemo(import("./Text.js")));
 // pass ref to functional components (forward ref)
 
 const App = () => {
-  const [showText, toggleText] = useState(false);
+  const [theme, setTheme] = useState("dark");
 
   return (
-    <>
-      <button onClick={() => toggleText((prv) => !prv)}>Toggle text</button>
-      {showText && (
-        <Suspense fallback={<Loading />}>
-          <Text>Hello world</Text>
-        </Suspense>
-      )}
-    </>
+    <ThemeContext.Provider value={[theme, setTheme]}>
+      <Navbar />
+    </ThemeContext.Provider>
   );
 };
 
